@@ -1,0 +1,13 @@
+{
+	"settings": {
+		"guess": "10",
+		"default_mode": "game",
+		"font": "calibri.ttf",
+		"ans_timeout": "10"
+	},
+
+	"screen": {
+		"screen_width": "600",
+		"screen_height": "500"
+	}
+}

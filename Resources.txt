@@ -1,0 +1,134 @@
+# Button Properties:
+def button(screen, position, text, size, colors="white on blue"):
+    fg, bg = colors.split(" on ")
+    font = pygame.font.SysFont("Arial", size)
+    text_render = font.render(text, 1, fg)
+    x, y, w , h = text_render.get_rect()
+    x, y = position
+    pygame.draw.line(screen, (150, 150, 150), (x, y), (x + w , y), 5)
+    pygame.draw.line(screen, (150, 150, 150), (x, y - 2), (x, y + h), 5)
+    pygame.draw.line(screen, (50, 50, 50), (x, y + h), (x + w , y + h), 5)
+    pygame.draw.line(screen, (50, 50, 50), (x + w , y+h), [x + w , y], 5)
+    pygame.draw.rect(screen, bg, (x, y, w , h))
+    print(screen.blit(text_render, (x, y)))
+    return screen.blit(text_render, (x, y))
+
+def menu():
+    """ This is the menu that waits you to click the s key to start """
+    # b0 contains the rect coordinates of the button
+    b1 = # Sprite Or e.g., Car, Prey with rect
+    b2  # Sprite Or e.g., Car, Prey with rect
+    while True:
+        for event in pygame.event.get():
+            if (event.type == pygame.QUIT):
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # check when you click if the coordinates of the pointer are in the rectangle of the buttons
+                if b1.collidepoint(pygame.mouse.get_pos()):
+                    pygame.quit()
+                elif b2.collidepoint(pygame.mouse.get_pos()):
+                    start()
+        pygame.display.update()
+    pygame.quit()
+
+# TEXTBOX:
+
+import pygame
+import sys
+  
+  
+# pygame.init() will initialize all
+# imported module
+pygame.init()
+  
+clock = pygame.time.Clock()
+  
+# it will display on screen
+screen = pygame.display.set_mode([600, 500])
+  
+# basic font for user typed
+base_font = pygame.font.Font(None, 32)
+user_text = ''
+  
+# create rectangle
+input_rect = pygame.Rect(200, 200, 140, 32)
+  
+# color_active stores color(lightskyblue3) which
+# gets active when input box is clicked by user
+color_active = pygame.Color('lightskyblue3')
+  
+# color_passive store color(chartreuse4) which is
+# color of input box.
+color_passive = pygame.Color('chartreuse4')
+color = color_passive
+  
+active = False
+  
+while True:
+    for event in pygame.event.get():
+  
+      # if user types QUIT then the screen will close
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+  
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if input_rect.collidepoint(event.pos):
+                active = True
+            else:
+                active = False
+  
+        if event.type == pygame.KEYDOWN:
+  
+            # Check for backspace
+            if event.key == pygame.K_BACKSPACE:
+  
+                # get text input from 0 to -1 i.e. end.
+                user_text = user_text[:-1]
+  
+            # Unicode standard is used for string
+            # formation
+            else:
+                user_text += event.unicode
+      
+    # it will set background color of screen
+    screen.fill((255, 255, 255))
+  
+    if active:
+        color = color_active
+    else:
+        color = color_passive
+          
+    # draw rectangle and argument passed which should
+    # be on screen
+    pygame.draw.rect(screen, color, input_rect)
+  
+    text_surface = base_font.render(user_text, True, (255, 255, 255))
+      
+    # render at position stated in arguments
+    screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+      
+    # set width of textfield so that text cannot get
+    # outside of user's text input
+    input_rect.w = max(100, text_surface.get_width()+10)
+      
+    # display.flip() will update only a portion of the
+    # screen to updated, not full area
+    pygame.display.flip()
+      
+    # clock.tick(60) means that for every second at most
+    # 60 frames should be passed.
+    clock.tick(60)
+
+# Get Font By System Not File:
+
+font1 = pygame.font.SysFont('calibri.ttf', 72)
+
+# Get Mouse Click:
+
+assign var to every blit
+use var as self.collidepoint(pygame.mouse.get_pos())
